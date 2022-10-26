@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -15,11 +16,15 @@ const Container = styled.div`
 const Header = styled.header`
   height: 15vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.accentColor};
 `;
-
+const BtnContainer = styled.div`
+  width : 100%;
+  text-align:right;
+`;
 const Title = styled.h1`
   font-size : 48px;
   color : ${(props) => props.theme.accentColor};
@@ -148,7 +153,12 @@ function Coin() {
   const priceMatch = useMatch("/:coinId/price");
   const chartMatch = useMatch("/:coinId/chart");
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(["info", coinId], () => fetchCoinInfo(coinId));
-  const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(["tickers", coinId], () => fetchCoinTickers(coinId));
+  const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
+    ["tickers", coinId],
+    () => fetchCoinTickers(coinId),
+    {
+      refetchInterval: 5000,
+    });
   /*useEffect(() => {
     (async () => {
       const infoData = await (
@@ -166,7 +176,15 @@ function Coin() {
   return (
     <>
       <Container>
+        <Helmet>
+          <title>
+            {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+          </title>
+        </Helmet>
         <Header>
+          <BtnContainer>
+            <Link to={`/`}>&larr;뒤로가기</Link>
+          </BtnContainer>
           <Title>
             {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
           </Title>
@@ -183,8 +201,8 @@ function Coin() {
                 <span>${infoData?.symbol}</span>
               </OverviewItem>
               <OverviewItem>
-                <span>Open Source:</span>
-                <span>{infoData?.open_source ? "Yes" : "No"}</span>
+                <span>Price:</span>
+                <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
               </OverviewItem>
             </Overview>
             <Description>{infoData?.description}</Description>
@@ -212,8 +230,8 @@ function Coin() {
               <Route path={`/${coinId}/chart`} element={<Chart />} />
             </Routes> */}
             <Routes>
-              <Route path="chart" element={<Chart />} />
-              <Route path="price" element={<Price />} />
+              <Route path="chart" element={<Chart coinId={coinId} />} />
+              <Route path="price" element={<Price coinId={coinId} />} />
             </ Routes>
           </>
 
