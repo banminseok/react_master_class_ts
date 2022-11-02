@@ -3,6 +3,12 @@ import { Categorise, IToDo, toDoState } from "../atoms";
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
+  const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setToDos((oldToDos) => {
+      const chToDo = oldToDos.filter((toDo) => id !== toDo.id);
+      return chToDo;
+    })
+  }
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
       currentTarget: { name },
@@ -42,6 +48,9 @@ function ToDo({ text, category, id }: IToDo) {
           Done
         </button>
       )}
+      <button name="REMOVE" onClick={onDelete}>
+        ❌
+      </button>
     </li>
   </>);
 

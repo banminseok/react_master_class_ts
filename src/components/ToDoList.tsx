@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { Categorise, categoryState, toDoSelector, toDoState } from "../atoms";
+import { Categorise, categoryState, LOCAL_KEY, toDoSelector, toDoState } from "../atoms";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 
@@ -11,7 +11,7 @@ import ToDo from "./ToDo";
 
 
 function ToDoList() {
-  //const toDos = useRecoilValue(toDoState);
+  const ToDosAll = useRecoilValue(toDoState);
   //const value = useRecoilValue(toDoState);
   //const modFn = useSetRecoilState(toDoState);
   const toDos = useRecoilValue(toDoSelector);
@@ -19,8 +19,10 @@ function ToDoList() {
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
   }
+  useEffect(() => {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(ToDosAll));
+  }, [ToDosAll]);
 
-  console.log(category);
   return (
     <div>
       <h1>To Dos</h1>
