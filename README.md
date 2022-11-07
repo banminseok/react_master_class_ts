@@ -1,6 +1,8 @@
-# git branch
+# git 
+  git branch
   master : Default,
   CoinTracker : 수업 전반부 CoinTracker 페이지...
+  git checkout '전환 브랜치 이름'
   
 # Route Summary
  / -> All coins
