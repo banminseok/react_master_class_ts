@@ -7,12 +7,21 @@ import DragabbleCard from "./Components/DragabbleCard";
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 680px;
   width: 100%;
   margin: 0 auto;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+`;
+const MainTitle = styled.div`
+  position: fixed;
+  width: 100%;
+  top :0;
+  left : 5px;
+  padding : 5px;
+  font-size: 1.5rem;
+  font-weight: 600;
 `;
 
 const Boards = styled.div`
@@ -62,6 +71,9 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
+        <MainTitle>
+          My Board (Drag & Drop)
+        </MainTitle>
         <Boards>
           {Object.keys(toDos).map((boardId) => (
             <Board key={boardId} boardId={boardId} toDos={toDos[boardId]} />
