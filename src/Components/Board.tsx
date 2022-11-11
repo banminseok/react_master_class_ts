@@ -71,6 +71,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
+
     const newToDo = {
       id: Date.now(),
       text: toDo,
@@ -82,6 +83,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
       };
     });
     setValue("toDo", "");
+
   }
   return (
     <Draggable draggableId={boardId} index={index} key={boardId}>
@@ -95,7 +97,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
               placeholder={`Add task on ${boardId}`}
             />
           </Form>
-          {/* <Droppable droppableId={boardId} type="todo">
+          <Droppable droppableId={boardId} type="todo">
             {(magic, info) =>
               <Area isDraggingOver={info.isDraggingOver}
                 isDraggingFromThis={Boolean(info.draggingFromThisWith)} ref={magic.innerRef} {...magic.droppableProps}>
@@ -104,7 +106,7 @@ function Board({ toDos, boardId, index }: IBoardProps) {
                 ))}
                 {magic.placeholder}
               </Area>}
-          </Droppable> */}
+          </Droppable>
         </Wrapper>
       )}
     </Draggable >

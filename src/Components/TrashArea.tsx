@@ -7,40 +7,50 @@ import { TrashState } from "../atoms";
 
 export function TrashArea() {
   const trashYN = useRecoilValue(TrashState);
-  return (
-    <Droppable droppableId="trashbin" type="trash">
-      {(magic, info) => (
-        <Container
-          ref={magic.innerRef} {...magic.droppableProps}
-        >
-          {trashYN && (
-            <TrashIcon >
-              <img src="./outline_auto_delete_black_48dp.png"></img>
-            </TrashIcon>
-          )}
-          {info.isDraggingOver && (
-            <Alert>Alert</Alert>
-          )}
-          <Draggable key={1} draggableId={"a1"} index={1}>
-            {(magic, snapshot) => (
-              <div ref={magic.innerRef} {...magic.dragHandleProps} {...magic.draggableProps} >
-                <div>test</div>
-              </div>
-            )}
-          </Draggable>
-          {magic.placeholder}
-        </Container>
-      )}
 
-    </Droppable>
+  return (
+    <>
+      <Droppable droppableId="trashbin" type="todo">
+        {(magic, info) => (
+          <Container
+            ref={magic.innerRef} {...magic.droppableProps}
+          >
+            {trashYN.todo && (
+              <TrashIcon >
+                todo<img src="./outline_auto_delete_black_48dp.png"></img>
+              </TrashIcon>
+            )}
+            {magic.placeholder}
+          </Container>
+        )}
+      </Droppable>
+
+
+      <Droppable droppableId="trashbin2" type="board">
+        {(magic, info) => (
+          <Container
+            ref={magic.innerRef} {...magic.droppableProps}
+          >
+            {trashYN.board && (
+              <TrashIcon >
+                board<img src="./outline_auto_delete_black_48dp.png"></img>
+              </TrashIcon>
+            )}
+            {magic.placeholder}
+          </Container>
+        )}
+      </Droppable>
+
+    </>
+
   );
 }
 const Container = styled.div`
-    _position: absolute;
+    position: absolute;
     bottom: 30px;
     right: 30px;
-    width: 300px;
-    height: 300px;    
+    width: 100px;
+    height: 100px;    
     transition: all 0.15s;
     z-index:99;
 `;
@@ -49,8 +59,8 @@ const TrashIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
   border: 2px solid #111;
   img{
     width : 100%;

@@ -25,7 +25,7 @@ let localJsonData = loadData !== null ? JSON.parse(loadData) : {};
 let boardData = localStorage.getItem(BOARD_KEY);
 let boardJsonData = boardData !== null ? JSON.parse(boardData) : ["To_do", "Doing", "Done"];
 //let boardJsonData = boardData !== null ? JSON.parse(boardData) : [];
-console.log(boardJsonData);
+//console.log(boardJsonData);
 export const toDoState = atom<IToDoState>({
   key: "toDo",
   //effects_UNSTABLE: [persistAtom],
@@ -56,8 +56,14 @@ export const BoardsCreateSelector = selector<any>({
   },
 });
 
+interface TrashState {
+  todo: boolean,
+  board: boolean
+}
 
-export const TrashState = atom<boolean>({
+export const TrashState = atom<TrashState>({
   key: "trash",
-  default: true,
+  default: { todo: true, board: false },
 });
+
+
