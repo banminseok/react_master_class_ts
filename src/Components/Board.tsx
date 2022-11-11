@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   display : flex;
   flex-direction:column;
   overflow: hidden;
+  margin: 0 5px;
 `;
 const Title = styled.h2`
   text-align: center;
@@ -94,16 +95,16 @@ function Board({ toDos, boardId, index }: IBoardProps) {
               placeholder={`Add task on ${boardId}`}
             />
           </Form>
-          <Droppable droppableId={boardId}>
+          {/* <Droppable droppableId={boardId} type="todo">
             {(magic, info) =>
               <Area isDraggingOver={info.isDraggingOver}
                 isDraggingFromThis={Boolean(info.draggingFromThisWith)} ref={magic.innerRef} {...magic.droppableProps}>
                 {toDos.map((toDo, index) => (
-                  <DragabbleCard key={toDo.id} index={index} toDoId={toDo.id} toDoText={toDo.text} />
+                  <DragabbleCard key={toDo.id} index={index} toDoId={toDo.id} toDoText={toDo.text} boardId={boardId} />
                 ))}
                 {magic.placeholder}
               </Area>}
-          </Droppable>
+          </Droppable> */}
         </Wrapper>
       )}
     </Draggable >
