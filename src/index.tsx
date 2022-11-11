@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
@@ -73,15 +73,17 @@ a {
 `
 const queryClient = new QueryClient();
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  // <React.StrictMode>
-  <RecoilRoot>
-    <ThemeProvider theme={darkTheme}>
-      <App />
-    </ThemeProvider>
-  </RecoilRoot>
-  // </React.StrictMode>
+ReactDOM.render(
+  <React.StrictMode>
+    <RecoilRoot>
+      <ThemeProvider theme={darkTheme}>
+        <App />
+      </ThemeProvider>
+    </RecoilRoot>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
+
+
 
 
