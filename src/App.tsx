@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  flex-wrap: wrap;
 `;
 
 const Boards = styled.div`
@@ -22,6 +23,31 @@ const Boards = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
+const TrashContainer = styled.div`
+  width: 300px;
+  height: 300px;    
+`;
+interface ITrashProps {
+  isDraggingFromThis: boolean;
+  isDraggingOver: boolean;
+}
+
+const Trash = styled.div<ITrashProps>`
+  border : 1px solid ${props => props.isDraggingOver
+    ? "#dfe6e9"
+    : props.isDraggingFromThis
+      ? "#b2bec3"
+      : "tomato"};
+`;
+
+
+
+const TrashIcon = styled.div`
+  width: 100px;
+  height: 100px;    
+  background-color : #f0f0f0;  
+  font-size : 20px;
+`;
 
 function App() {
   const [toDos, setToDos] = useRecoilState(toDoState);
@@ -67,6 +93,19 @@ function App() {
             <Board key={boardId} boardId={boardId} toDos={toDos[boardId]} />
           ))}
         </Boards>
+        <TrashContainer>
+          <Droppable droppableId="trashbin" type="trash">
+            {(magic, info) => (
+              <Trash ref={magic.innerRef} {...magic.droppableProps}
+                isDraggingOver={info.isDraggingOver}
+                isDraggingFromThis={Boolean(info.draggingFromThisWith)}>
+                <TrashIcon >
+                  휴지통
+                </TrashIcon>
+              </Trash>
+            )}
+          </Droppable>
+        </TrashContainer>
       </Wrapper>
     </DragDropContext>
   );
