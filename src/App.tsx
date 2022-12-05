@@ -1,20 +1,32 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Header from "./Components/Header";
-import Home from "./Routes/Home";
-import Search from "./Routes/Search";
-import Tv from "./Routes/Tv";
+import styled from "styled-components";
 
+const Father = styled.div`
+  display:flex;
+`;
+
+const BoxOne = styled.div`
+  background-color: teal;
+  width: 100px;
+  height: 100px;
+`;
+const BoxTwo = styled.div`
+  background-color: tomato;
+  width: 100px;
+  height: 100px;
+`;
+const Text = styled.span`
+  color: white;
+`;
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/tv" element={<Tv />}></Route>
-        <Route path="/search" element={<Search />}></Route>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/movies/:id" element={< Home />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Father>
+        <BoxOne>
+          <Text>Hello</Text>
+        </BoxOne>
+        <BoxTwo />
+      </Father>
+    </>
   )
 }
 
