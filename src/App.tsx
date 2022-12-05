@@ -18,6 +18,18 @@ const rotationAnimation = keyframes`
     border-radius:0px;
   }
 `;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width : 100vw;
+  height: 100vh;
+  background-color: ${props => props.theme.backgroundColor};
+`;
+const Title = styled.h1`
+  color : ${props => props.theme.textColor}
+`;
 
 const Father = styled.div`
   display:flex;
@@ -70,7 +82,8 @@ const Input = styled.input.attrs({ required: true, minLength: 10 })`
 
 function App() {
   return (
-    <>
+    <Wrapper>
+      <Title>Themes Sample</Title>
       <Father>
         <Box bgColor="teal" />
         <Box bgColor="tomato" />
@@ -95,8 +108,8 @@ function App() {
         <div style={{ backgroundColor: "teal", width: "100px", height: "100px" }}></div>
         <div style={{ backgroundColor: "tomato", width: "100px", height: "100px" }}></div>
       </div>
-    </>
-  )
+    </Wrapper>
+  );
 }
 
 export default App;
