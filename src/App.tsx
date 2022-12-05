@@ -26,6 +26,16 @@ const Circle = styled(Box)`
   border-radius: 50px;
 `;
 
+const Btn = styled.button`
+  color : white;
+  background-color : tomato;
+  border:0;
+  border-radius:15px;
+`;
+const Input = styled.input.attrs({ required: true, minLength: 10 })`
+  background-color : tomato;
+`;
+
 function App() {
   return (
     <>
@@ -33,7 +43,17 @@ function App() {
         <Box bgColor="teal" />
         <Box bgColor="tomato" />
         <Circle bgColor="blue" />
-
+      </Father>
+      <Father>
+        <Btn>Log in</Btn>
+        <Btn as="a" href="/login">Log in</Btn>
+      </Father>
+      <Father>
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
       </Father>
       <div className={styles.movie} style={{ display: "flex" }}>
         <div style={{ backgroundColor: "teal", width: "100px", height: "100px" }}></div>
