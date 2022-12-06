@@ -1,8 +1,9 @@
 import { BrowserRouter, createBrowserRouter, Route, Routes } from "react-router-dom";
-import About from "./About";
+import About from "./screens/About";
 import Header from "./components/Header";
-import Home from "./Home";
+import Home from "./screens/Home";
 import Root from "./Root";
+import NotFound from "./screens/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />,
       }
-    ]
+    ],
+    errorElement: <NotFound />
   }
 ]);
 
